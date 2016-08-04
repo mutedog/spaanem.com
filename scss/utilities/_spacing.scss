@@ -1,0 +1,49 @@
+@mixin padding ($_prefix) {
+    @for $i from 0 through length($spacing) {
+        $value: 0;
+        @if $i == 0  {
+            $value: 0;
+        } @else {
+            $value: nth($spacing, $i);
+        }
+
+        .#{$_prefix}p#{$i}  { padding:        $value }
+        .#{$_prefix}pt#{$i} { padding-top:    $value }
+        .#{$_prefix}pr#{$i} { padding-right:  $value }
+        .#{$_prefix}pb#{$i} { padding-bottom: $value }
+        .#{$_prefix}pl#{$i} { padding-left:   $value }
+        .#{$_prefix}py#{$i} { padding-top:    $value; padding-bottom: $value }
+        .#{$_prefix}px#{$i} { padding-left:   $value; padding-right:  $value }
+    }
+}
+
+@mixin margin ($_prefix) {
+    @for $i from 0 through length($spacing) {
+        $value: 0;
+        @if $i == 0  {
+            $value: 0;
+        } @else {
+            $value: nth($spacing, $i);
+        }
+
+        .#{$_prefix}m#{$i}  { margin:        $value }
+        .#{$_prefix}mt#{$i} { margin-top:    $value }
+        .#{$_prefix}mr#{$i} { margin-right:  $value }
+        .#{$_prefix}mb#{$i} { margin-bottom: $value }
+        .#{$_prefix}ml#{$i} { margin-left:   $value }
+        .#{$_prefix}my#{$i} { margin-top:    $value; margin-bottom: $value }
+        .#{$_prefix}mx#{$i} { margin-left:   $value; margin-right:  $value }
+    }
+
+    // Negative margins
+    @if $includeNegativeMargins {
+        @for $i from 1 through $negativeMarginLevels {
+            $value: nth($spacing, $i);
+
+            .#{$_prefix}mnt#{$i} { margin-top:    -$value }
+            .#{$_prefix}mnr#{$i} { margin-right:  -$value }
+            .#{$_prefix}mnb#{$i} { margin-bottom: -$value }
+            .#{$_prefix}mnl#{$i} { margin-left:   -$value }
+        }
+    }
+}

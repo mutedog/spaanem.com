@@ -1,0 +1,21 @@
+{
+  "name": "spaanem.com",
+  "description": "Resume/portfolio website of matt spaanem",
+  "main": "index.html",
+  "authors": [
+    "Matt <matt@spaanem.com>"
+  ],
+  "license": "ISC",
+  "homepage": "spaanem.com",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "jquery": "^3.1.0",
+    "normalize-css": "normalize.css#^4.2.0"
+  }
+}

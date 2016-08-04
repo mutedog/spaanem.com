@@ -1,0 +1,204 @@
+/*------------------------------------*\
+    #BASE-ELEMENTS
+\*------------------------------------*/
+
+html { box-sizing: border-box; }
+*, *:before, *:after { box-sizing: inherit; }
+
+html {
+    font-family: $fontFamilyBody;
+    color: palette(black);
+    font-size: $fontSize1;
+    line-height: 1.5;
+    // For Pushy
+    height: 100%;
+    overflow-x: hidden;
+}
+
+/**
+ * Body rules. Mostly for Pushy off-canvas menu.
+ * 
+ * 1. For Pushy. Recall that when I just added this to the body, it 
+ *    would prevent browsers from remembering the page scroll position 
+ *    after clicking 'back'. Only assigning it on .pushy-active allows 
+ *    the browser to remember scroll position.
+ *    
+ * 2. Because we're using Container-outer to frame the entire site, we
+ *    occassionally run into the issue where the site frame wraps around
+ *    the bottom of the page when the content isn't long enough to fill 
+ *    the height of the browser. It looks weird and bad. So we'll use a
+ *    psuedo element as a mask to cover the bottom of the...just look
+ *    in the inspector to see what I'm talking about.
+ * 3. This turns the background gray and thus frames the entire site.
+ *    See above.
+ */
+body {
+    position: relative;
+}
+
+/*------------------------------------*\
+    #RESETS
+\*------------------------------------*/
+
+header, footer { width: 100%; }
+h1,h2,h3,h4,h5,h6,blockquote { margin:0; padding:0; }
+
+/*------------------------------------*\
+    #HEADINGS
+\*------------------------------------*/
+
+h1,h2,h3,h4,h5,h6 { 
+    font-family: $fontFamilyHeading;
+    font-weight: bold; 
+    color: palette(black); 
+}
+
+// Headings @small
+h1         { font-size: $fontSize4; line-height: $lineHeightSize4; }
+h2         { font-size: $fontSize3; line-height: $lineHeightSize3; }
+h3         { font-size: $fontSize2; line-height: $lineHeightSize2; }
+h4, legend { font-size: $fontSize1; line-height: $lineHeightSize1; }
+h5         { font-size: $fontSize1; line-height: $lineHeightSize1; }
+h6         { font-size: $fontSize1; line-height: $lineHeightSize1; }
+
+// Headings @medium and up
+@include breakpoint(m) {
+    h1         { font-size: $fontSize6; line-height: $lineHeightSize6; }
+    h2         { font-size: $fontSize5; line-height: $lineHeightSize5; }
+    h3         { font-size: $fontSize4; line-height: $lineHeightSize4; }
+    h4, legend { font-size: $fontSize3; line-height: $lineHeightSize3; }
+    h5         { font-size: $fontSize2; line-height: $lineHeightSize2; }
+    h6         { font-size: $fontSize1; line-height: $lineHeightSize1; }
+}
+
+// Heading/font size classes
+.h1 { font-size: $fontSize6; line-height: $lineHeightSize6; }
+.h2 { font-size: $fontSize5; line-height: $lineHeightSize5; }
+.h3 { font-size: $fontSize4; line-height: $lineHeightSize4; }
+.h4 { font-size: $fontSize3; line-height: $lineHeightSize3; }
+.h5 { font-size: $fontSize2; line-height: $lineHeightSize2; }
+.h6 { font-size: $fontSize1; line-height: $lineHeightSize1; }
+
+/*------------------------------------*\
+    #TEXT
+\*------------------------------------*/
+
+p, pre, blockquote { 
+    margin: 0;
+    padding: 0;
+    font-size: $fontSizeSmall;
+    font-weight: normal;
+
+    // Watch out for nested p
+    p {
+        font-size: $fontSize1;
+    }
+
+    @include breakpoint(m) {
+        font-size: $fontSize1;
+    }
+}
+
+p + * {
+    margin-top: $pad2;
+}
+
+figure {
+    padding: 0;
+    margin-left: $pad3;
+    margin-right: $pad3;
+    border-bottom: 1px solid palette(gray, lightest);
+    padding-bottom: $pad1;
+}
+
+figure + * {
+    margin-top: $pad2;
+}
+
+code { font-family: Monaco, monospace; font-size: .9em; }
+
+dt, strong, .bold { font-weight:bold; }
+
+em, .italic { font-style:italic; }
+
+small, .text-small { 
+    font-size: $fontSizeSmaller;
+
+    @include breakpoint(m) {
+        font-size: $fontSizeSmall;
+    }
+}
+
+/*------------------------------------*\
+    #LISTS
+\*------------------------------------*/
+
+ul { padding-left: 2em;  padding-bottom: $pad1; margin: 0 }
+ul ul {padding-top: $pad1; }
+li { 
+    // padding-bottom: $pad1;
+    font-size: $fontSizeSmall;
+    p {
+        font-size: 1em;
+    }
+    li {
+        font-size: 1em;
+    }
+    @include breakpoint(m) {
+        font-size: $fontSize1;
+    }
+}
+
+/*------------------------------------*\
+    #LINKS
+\*------------------------------------*/
+
+a {
+    text-decoration: none;
+    color: palette(blue);
+}
+
+// Avoid using tag to lower specificity
+:visited {
+    color: palette(blue);
+}
+
+p, figcaption {
+
+    a {
+        text-decoration: underline;
+        color: palette(blue);
+    }
+
+    // Avoid using tag to lower specificity
+    :visited {
+        color: purple;
+    }
+}
+
+/*------------------------------------*\
+    #MISC
+\*------------------------------------*/
+
+hr {
+    margin: 0;
+    padding: 0;
+    height: 1px;
+    border: none;
+    background: palette(gray, lightest);
+}
+
+img { vertical-align: bottom; max-width: 100%; height: auto; }
+
+
+.hide-for-i {
+    @include breakpoint(i) {
+        display: none;
+    }
+}
+.show-for-i {
+    display: none;
+    @include breakpoint(i) {
+        display: inherit;
+    }
+}

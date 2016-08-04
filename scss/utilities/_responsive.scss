@@ -1,0 +1,104 @@
+/*------------------------------------*\
+    #ROUNDING
+\*------------------------------------*/
+
+/**
+ * These are wrapped in a mixin so that responsiveClassesGenerator()
+ * can output them multiple times with different prefixes
+ */
+@mixin gridClasses($_prefix:'', $gridColumns:12, $breakpoint_min:'', $breakpoint_max:''){
+    
+    // grid classes
+    .#{$_prefix}grid {
+        clear: none; float: left; 
+    }
+    @for $i from 1 through $gridColumns {
+        .#{$_prefix}grid-#{$i} {
+            @extend .#{$_prefix}grid;
+            width:percentage($i/$gridColumns);
+        }
+    }
+
+    // offset classes
+    .#{$_prefix}push-0 {
+        margin-left: 0;
+    }
+    .#{$_prefix}pull-0 {
+        margin-left: 0;
+    }
+    @for $i from 1 through $gridColumns {
+        .#{$_prefix}push-#{$i} {
+            margin-left:percentage($i/$gridColumns);
+        }
+        .#{$_prefix}pull-#{$i} {
+            margin-left:percentage($i/$gridColumns) * -1;
+        }
+    }
+}
+
+/**
+ * Generate all responsive utilities. 
+ *
+ * These are wrapped in a mixin so that mixins/_responsive-classes.scss
+ * can output them multiple times with different prefixes
+ * 
+ * Note: the order of some of these matters. E.g. text-large/small/etc 
+ * needs to come after the h1/h2/etc. because it's meant to override them
+ */
+@mixin utilityClasses($_prefix:''){
+
+    // Boxes
+    .#{$_prefix}box-center { margin-left:auto; margin-right:auto;  display: block; }
+    // Generate responsive containers
+    @include boxesGenerator($boxWidths,'#{$_prefix}box');
+
+    // Margin/padding
+    @include padding($_prefix);
+    @include margin($_prefix);
+
+    @if $includeResponsiveBorders or $_prefix == '' {
+        .#{$_prefix}border { border: solid $borderWidth rgba(0,0,0,.1); }
+        .#{$_prefix}border-0 { border: none; }
+        .#{$_prefix}border-top { border-top: solid $borderWidth rgba(0,0,0,.1); }
+        .#{$_prefix}border-bottom { border-bottom: solid $borderWidth rgba(0,0,0,.1); }
+        .#{$_prefix}border-left { border-left: solid $borderWidth rgba(0,0,0,.1); }
+        .#{$_prefix}border-right { border-right: solid $borderWidth rgba(0,0,0,.1); }
+    }
+
+    .#{$_prefix}float-none { float: none; }
+    .#{$_prefix}float-right { float: right; }
+    .#{$_prefix}float-left { float: left; }
+
+    .#{$_prefix}clear { clear: both; }
+
+    .#{$_prefix}text-center { text-align:center; }
+    .#{$_prefix}text-left { text-align:left; }
+    .#{$_prefix}text-right { text-align:right; }
+
+    .#{$_prefix}hidden { display: none; }
+
+    .#{$_prefix}block { display: block; }
+
+    .#{$_prefix}inline { display: inline-block; width: auto; }
+
+    // $_prefix will equal '' when we're generating the non-responsive
+    // classes, so allow
+    @if $includeResponsiveVertCenter or $_prefix == ''  {
+        .#{$_prefix}vert-center { position: absolute; top: 50%; transform: translateY(-50%); }
+    }
+
+    .#{$_prefix}h1 { font-size: $fontSize6; line-height: $lineHeightSize6; }
+    .#{$_prefix}h2 { font-size: $fontSize5; line-height: $lineHeightSize5; }
+    .#{$_prefix}h3 { font-size: $fontSize4; line-height: $lineHeightSize4; }
+    .#{$_prefix}h4 { font-size: $fontSize3; line-height: $lineHeightSize3; }
+    .#{$_prefix}h5 { font-size: $fontSize2; line-height: $lineHeightSize2; }
+    .#{$_prefix}h6 { font-size: $fontSize1; line-height: $lineHeightSize1; }
+}
+
+@include responsiveClassesGenerator($gridCols, map-values($breakpoints), $breakpointPrefixes, 'em');
+
+// Default settings for responsiveClassesGenerator()
+//     $gridColumns: 12,                    // number of grid columns 
+//     $breakpoints: (0, 480px, 800px),     // array of breakpoints
+//     $breakpointPrefixes: (s-,m-,l-),     // array of breakpoint prefixes
+//     $breakpointType: 'px'                // breakpoint type px or em 

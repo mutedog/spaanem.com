@@ -1,0 +1,17 @@
+.Logo {
+	display: block;
+	background: url(/img/logo-bg.jpg) no-repeat;
+	padding: 1.5rem 2rem 1rem;
+	margin: 1rem 0 1rem -2rem;
+	max-width: 400px;
+	@include breakpoint(m) {
+		max-width: 350px;
+		padding: 1.5rem 2rem 1rem 4rem;
+		margin: 1.5rem 0 1rem -4rem;
+	}
+	@include breakpoint(l) {
+		max-width: 366px;
+		padding: 1.5rem 2rem 1rem 5rem;
+		margin: 3rem 0 1rem -5rem;
+	}
+}

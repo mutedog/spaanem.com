@@ -1,0 +1,39 @@
+.js-toggleSection {
+	&:after {
+		content: " +";
+		display: block;
+		float: right;
+	}
+	&.is-open:after {
+		content: " -";
+	}
+	@include breakpoint(i) {
+		&:after {
+			display: none;
+		}
+	}
+}
+
+.js-section {
+	max-height: 0;
+	transition: max-height 0.5s;
+	overflow: hidden;
+
+	&.is-open {
+		&.edu {
+			max-height: 13rem;
+		}
+		&.Skills {
+			max-height: 26rem;
+		}
+		&.work {
+			max-height: 82rem;
+		}
+		&.samples {
+			max-height: 38rem;
+		}
+	}
+	@include breakpoint(i) {
+		max-height: none;
+	}
+}

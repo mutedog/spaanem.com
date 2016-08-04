@@ -1,0 +1,46 @@
+/**
+ * We'll use a Sass map to store all of our colors and variations. See
+ * http://erskinedesign.com/blog/friendlier-colour-names-sass-maps/
+ * Colors can then be used like:
+ *
+ *   palette([color], [tone]);
+ *   e.g. palette(green, light);
+ */
+
+// Base tones. Bass tones? Boss tones?
+$_color-base-gray: rgb(120,120,120);
+$_color-base-white: rgb(255,255,255);
+$_color-base-black: rgb(35,31,32);
+
+$palettes: (
+    blue: (
+        // darkest: rgb(2, 42, 66),
+        // darker: rgb(4, 57, 89),
+        dark: rgb(61, 73, 79),
+        base: rgb(69, 111, 127)
+        // light: rgb(24, 148, 230),
+        // lighter: rgb(27, 161, 250),
+        // lightest: rgb(37, 169, 252)
+    ),
+    gray: (
+        lightest: rgb(235,235,235),
+        lighter: rgb(195,195,195),
+        light: rgb(155,155,155),
+        base: $_color-base-gray,
+        dark: rgb(91,91,91),
+        darker: rgb(66,66,66),
+        darkest: rgb(45,45,45)
+    ),
+    white: (
+        base: $_color-base-white,
+        dark: rgb(248,248,248)
+    ),
+    black: (
+        base: $_color-base-black,
+        dark: rgb(0,0,0)
+    )
+);
+
+@function palette($palette, $tone: 'base') {
+    @return map-get(map-get($palettes, $palette), $tone);
+}

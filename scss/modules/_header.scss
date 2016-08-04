@@ -1,0 +1,22 @@
+.Header {
+	font-family: $fontFamilyHeading;
+	padding-left: 2rem;
+
+	@include breakpoint(m) {
+		padding-left: 4rem;
+		line-height: 1.1;
+	}
+	@include breakpoint(l) {
+		padding-left: 5rem;
+		line-height: 1.1;
+	}
+
+	span[itemprop="name"],
+	span[itemprop="jobTitle"] {
+		display: none;
+	}
+
+	div[itemprop="address"] {
+		text-transform: lowercase;
+	}
+}

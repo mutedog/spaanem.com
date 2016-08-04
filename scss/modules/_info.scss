@@ -1,0 +1,29 @@
+.Info {
+	margin-bottom: 1rem;
+	@include breakpoint(i) {
+		margin-bottom: 3rem;
+	}
+	&.\+left {
+		
+		@include breakpoint(i) {
+			width: 25%;
+			float: left;
+			clear: left;
+			margin-right: 2rem;
+			text-align: right;	
+		}
+		@include breakpoint(l) {
+			width: 366px;
+		}
+	}
+
+	&.\+right {
+		@include breakpoint(i) {
+			margin-left: 28%;
+		}
+		@include breakpoint(l) {
+			margin-left: 400px;
+			max-width: 40rem;
+		}
+	}
+}
