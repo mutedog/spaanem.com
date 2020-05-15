@@ -7,8 +7,9 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Matt Spaanem: Web Developer / Graphic Designer</title>
-        <meta name="description" content="">
+        <meta name="description" content="CV website of Web Developer and Graphic Designer Matt Spaanem">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="format-detection" content="telephone=no">
         <link rel="apple-touch-icon" href="favicon.png">
 
         <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
@@ -22,169 +23,90 @@
         <![endif]-->
 
         <header class="Header" itemscope itemtype="http://schema.org/Person">
-            <a class="Logo" href="/"><img src="/img/logotype.png" alt="Matt Spaanem : Web Developer / Graphic Designer"></a>
-            <span itemprop="name">Matt Spaanem</span>
-            <span itemprop="jobTitle">Web Developer / Graphic Designer</span>
+            <a class="Logo" href="/"><img src="/img/logotype.png" data-bind="attr: { alt: name + ' : ' + title }"></a>
+            <span itemprop="name" data-bind="text: name"></span>
+            <span itemprop="jobTitle" data-bind="text: title"></span>
             <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-                <span itemprop="streetAddress">1764 N. 10th St.</span><br>
-                <span itemprop="addressLocality">Washougal</span>,
-                <span itemprop="addressRegion">WA</span>
-                <span itemprop="postalCode">98671</span>
+                <span itemprop="streetAddress" data-bind="text: street"></span><br>
+                <span itemprop="addressLocality" data-bind="text: city"></span>,
+                <span itemprop="addressRegion" data-bind="text: state"></span>
+                <span itemprop="postalCode" data-bind="text: zip"></span>
               </div>
-              <a href="mailto:matt@spaanem.com" itemprop="email">matt@spaanem.com</a><br>
-              <a href="http://spaanem.com" itemprop="url">spaanem.com</a><br>
-              <a href="tel:4143319134" itemprop="telephone">(414) 331-9134</a>
+              <a itemprop="email" data-bind="text: email, attr: { href: 'mailto:' + email, title: 'Email ' + name }"></a><br>
+              <a itemprop="url" data-bind="text: url, attr: { href: 'https://' + url, title: name }"></a><br>
+              <a itemprop="telephone" data-bind="text: phone, attr: { href: 'tel:' + phone.replace('(', '').replace(')', '').replace(' ', '').replace('-','') }"></a>
             </div>
         </header>
 
         <main>
-            <section class="Info +left">
+            <section class="Info EduSection">
                 <h2 class="js-toggleSection  h4">Education</h2>
-                <div class="js-section  edu">
+                <div class="js-section  edu" data-bind="foreach: eduStats">
                     <div class="School">
-                        <h3 class="h5">Milwaukee Institute of Art &amp;&nbsp;Design</h3>
-                        <p>Communication Design BFA<br>
-                           Graduated 2006<br>
-                           Cumulative GPA 3.52</p>
-                    </div>
-                    <div class="School">
-                        <h3 class="h5">Purdue University</h3>
-                        <p>Computer Graphics Coursework<br>
-                           1997 - 1999</p>
+                        <h3 class="h5" data-bind="text: name"></h3>
+                        <div data-bind="text: deets"></div>
+                        <div data-bind="text: date" class="School__date"></div>
+                        <!-- ko if: grade -->
+                        <div data-bind="text: grade"></div>
+                        <!-- /ko -->
                     </div>
                 </div>
             </section>
-            <section class="Info +left">
+            <section class="Info SkillsSection">
                 <h2 class="js-toggleSection  h4">Skills</h2>
-                <ul class="Skills js-section">
-                    <li><a href="https://www.w3.org/TR/html5/">HTML5</a></li>
-                    <li><a href="https://www.w3.org/TR/css-2010/">CSS</a>/<a href="http://sass-lang.com/">SCSS</a></li>
-                    <li><a href="https://en.wikipedia.org/wiki/Responsive_web_design">Responsive Web Design</a></li>
-                    <li><a href="http://getbem.com/">BEM</a>/<a href="https://smacss.com/">SMACSS</a></li>
-                    <li><a href="http://susy.oddbird.net/">Susy Grid System</a></li>
-                    <li><a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">Javascript</a>/<a href="http://jquery.com/">jQuery</a></li>
-                    <li><a href="http://twig.sensiolabs.org/">Twig Templating</a></li>
-                    <li><a href="http://gulpjs.com/">Gulp Build Scripts</a></li>
-                    <li><a href="https://www.npmjs.com/">Node Package Manager</a></li>
-                    <li><a href="https://git-scm.com/">Git</a></li>
-                    <li><a href="https://www.sublimetext.com/">Sublime Text</a></li>
-                    <li><a href="https://www.adobe.com/products/photoshop.html">Photoshop</a></li>
-                    <li><a href="https://www.adobe.com/products/illustrator.html">Illustrator</a></li>
-                    <li><a href="http://www.adobe.com/products/fireworks.html">Fireworks</a></li>
-                    <li><a href="https://ellislab.com/expressionengine">ExpressionEngine</a> (CMS)</li>
-                    <li><a href="https://craftcms.com/">Craft</a> (CMS)</li>
-                    <li><a href="https://wordpress.org/">WordPress</a> (CMS)</li>
-                    <li><a href="http://php.net/">PHP</a>/<a href="https://www.mysql.com/">MySQL</a></li>
+                <ul class="skills js-section" data-bind="foreach: skills">
+                    <li>
+                        <a data-bind="text: name, attr: { href: link, title: name }"></a>
+                        <!-- ko if: name2 -->
+                        / <a data-bind="text: name2, attr: { href: link2, title: name2 }"></a>
+                        <!-- /ko -->
+                    </li>
                 </ul>
             </section>
 
-            <section class="Info +left show-for-i">
-                <h2 class="h4">Extras</h2>
-                <a href="/spaanem_resume.pdf">PDF Resume</a><br>
-                <a href="https://www.linkedin.com/in/spaanem">LinkedIn</a>
-            </section>
-
-            <section class="Info +right">
+            <section class="Info SamplesSection">
                 <h2 class="js-toggleSection  h4">Samples</h2>
-                <div class="js-section  samples">
+                <div class="js-section  samples" data-bind="foreach: samples">
                     <div class="Sample">
-                        <a href="https://butler-plumbing.com/" class="h5  bold">butler-plumbing.com</a>
-                        <div class="Sample__desc">Mobile-first responsive website built in Craft with Twig templates utilizing BEM-like CSS naming conventions and csstyle.io mixins and Susy grids with workflow build via Gulp. I also updated the vue.js form application to adjust available time slots for the schedule form based on time of day.</div>
-                    </div>
-                    <div class="Sample">
-                        <a href="https://www.coolray.com/" class="h5  bold">coolray.com</a>
-                        <div class="Sample__desc">Mobile-first responsive website built in ExpressionEngine with a MVVM template architecture, BEM CSS naming and Susy grids with workflow build via Gulp. This site features a reorganized blog system (Help Guides) that's based on category hierarchy so users can more easily find content relevant to them.</div>
-                    </div>
-                    <div class="Sample">
-                        <a href="http://georgebrazilhvac.com/" class="h5  bold">georgebrazilhvac.com</a> &amp; <a href="http://georgebrazilplumbingelectrical.com/" class="h5  bold">georgebrazilplumbingelectrical.com</a>
-                        <div class="Sample__desc">Mobile-first responsive sister sites built in ExpressionEngine with a MVVM template architecture, BEM CSS naming and Susy grids with workflow build via Gulp.</div>
-                    </div>
-                    <div class="Sample">
-                        <a href="http://airexpertsnj.com/" class="h5  bold">airexpertsnj.com</a>
-                        <div class="Sample__desc">Desktop-first responsive website built in ExpressionEngine with Susy grids and Gulp workflow. I originally built this site in 2013 and recently went back to convert it to responsive, this required very little refactoring of the HTML which resulted in the project completing ridiculously early and way under budget.</div>
+                        <a data-bind="text: title, attr: { href: link, title: title }" class="h5  bold"></a>
+                        <div data-bind="text: desc" class="Sample__desc"></div>
                     </div>
                 </div>
             </section>
 
-            <section class="Info +right">
+            <section class="Info WorkSection">
                 <h2 class="js-toggleSection  h4">Work</h2>
-                <div class="js-section  work">
+                <div class="js-section  work" data-bind="foreach: workplaces">
                     <div class="Job">
-                        <h3 class="Job__employer  h5">Rocket Media</h3>
-                        <div class="Job__date">2011 - 2016</div>
-                        <div class="Job__title">Web Developer</div>
-                        <p class="Job__description">Remote work; Front End HTML, CSS/SCSS, Javascript/jQuery and Gulp workflow development. Configure and code backend templates for CMS (ExpressionEngine, Craft, WordPress) and static&nbsp;websites.</p>
-                    </div>
-                    <div class="Job">
-                        <h3 class="Job__employer  h5">Trisept Solutions</h3>
-                        <div class="Job__date">2010 - 2011</div>
-                        <div class="Job__title">Web Designer</div>
-                        <p class="Job__description">Front end HTML and CSS development for ASP.NET and SharePoint based&nbsp;websites.</p>
-                    </div>
-                    <div class="Job">
-                        <h3 class="Job__employer  h5">ec-connection</h3>
-                        <div class="Job__date">2008 - 2010</div>
-                        <div class="Job__title">Interactive Designer</div>
-                        <p class="Job__description">Website design and development in HTML, CSS, and Javascript/jQuery including development for content management&nbsp;systems.</p>
-                    </div>
-                    <div class="Job">
-                        <h3 class="Job__employer  h5">Boelter + Lincoln</h3>
-                        <div class="Job__date">2006 - 2008</div>
-                        <div class="Job__title">Interactive Designer</div>
-                        <p class="Job__description">Web banner creation in Flash/Actionscript including rich media and interactive executions. HTML and CSS development for&nbsp;websites.</p>
-                    </div>
-                    <div class="Job">
-                        <h3 class="Job__employer  h5">Panda Communications</h3>
-                        <div class="Job__date">2002 - 2006</div>
-                        <div class="Job__title">Web Designer/Developer</div>
-                        <p class="Job__description">Customize ecommerce templates in HTML and CSS to match client identity. Design/develop FileMaker Pro database driven&nbsp;websites.</p>
-                    </div>
-                    <div class="Job">
-                        <h3 class="Job__employer  h5">Hoffman York</h3>
-                        <div class="Job__date">Summer 2005</div>
-                        <div class="Job__title">Intern Designer</div>
-                        <p class="Job__description">Concept and design advertisements for the summer intern project. Design logo options for short-term contest&nbsp;identity.</p>
-                    </div>
-                    <div class="Job">
-                        <h3 class="Job__employer  h5">Compuware Corporation</h3>
-                        <div class="Job__date">2000 - 2002</div>
-                        <div class="Job__title">Web/Multimedia Designer</div>
-                        <p class="Job__description">Concept and build in HTML, browser-based training modules. Build multiple sections of large interactive flash marketing&nbsp;movie.</p>
-                    </div>
-                    <div class="Job">
-                        <h3 class="Job__employer  h5">Daniel McCoy</h3>
-                        <div class="Job__date">2001</div>
-                        <div class="Job__title">Web Design - Freelance</div>
-                        <p class="Job__description">Concept and design website; develop online photo album in&nbsp;PHP.</p>
-                    </div>
-                    <div class="Job">
-                        <h3 class="Job__employer  h5">WebCombo</h3>
-                        <div class="Job__date">2000</div>
-                        <div class="Job__title">Web Designer</div>
-                        <p class="Job__description">Create dynamic flash interfaces for internet portal. Design and code websites in HTML for various&nbsp;clients.</p>
-                    </div>
-                    <div class="Job">
-                        <h3 class="Job__employer  h5">Dramm Corporation</h3>
-                        <div class="Job__date">Summer 1998</div>
-                        <div class="Job__title">Intern Designer</div>
-                        <p class="Job__description">Illustrate various products and components for catalog. Design product labels and informational/sell sheets. Assist department head in product photo&nbsp;shoots.</p>
+                        <h3 class="Job__employer  h5" data-bind="text: place"></h3>
+                        <time class="Job__date" data-bind="text: dates"></time>
+                        <div class="Job__title" data-bind="text: position"></div>
+                        <p class="Job__description" data-bind="text: desc"></p>
                     </div>
                 </div>
             </section>
 
-            <section class="Info  hide-for-i">
+            <section class="Info ExtrasSection">
+                <h2 class="h4">Extras</h2>
+                <div data-bind="foreach: extras">
+                    <div><a data-bind="text: name, attr: { href: link, title: name }"></a></div>
+                </div>
+            </section>
+
+            <!-- <section class="Info  hide-for-i">
                 <h2 class="h4">Extras</h2>
                 <a href="/spaanem_resume.pdf">PDF Resume</a><br>
                 <a href="https://www.linkedin.com/in/spaanem">LinkedIn</a>
-            </section>
+            </section> -->
 
         </main>
-
+        <script type='text/javascript' src='/js/vendor/knockout.js'></script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
+        <script src="js/data.js"></script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>

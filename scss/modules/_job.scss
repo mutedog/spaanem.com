@@ -9,6 +9,11 @@
 
 	.Job__date {
 		float: right;
+		pointer-events: none;
+		& > * {
+			text-decoration: none;
+			color: inherit;
+		}
 	}
 
 	.Job__title {

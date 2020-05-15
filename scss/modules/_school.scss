@@ -2,3 +2,11 @@
 	margin-bottom: 1rem;
 	margin-top: 0.5rem;
 }
+
+	.School__date {
+		pointer-events: none;
+		& > * {
+			text-decoration: none;
+			color: inherit;
+		}
+	}

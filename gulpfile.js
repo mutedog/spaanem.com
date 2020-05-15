@@ -1,22 +1,15 @@
 'use strict';
 
 var gulp = require('gulp');
+var watch = require('gulp-watch');
 var sass = require ('gulp-sass');
 var sassGlob = require('gulp-sass-glob');
 var autoprefixer = require('gulp-autoprefixer');
 var plumber = require('gulp-plumber');
 var notify = require('gulp-notify');
 var sourcemaps = require('gulp-sourcemaps');
-var browserSync = require('browser-sync').create('server');
+var browserSync = require('browser-sync').create();
 
-gulp.task('browserSync', function(){
-	browserSync.init({
-		host: 'spaanem.loc',
-		open: 'external',
-		proxy: 'https://spaanem.loc/',
-		ghostMode: false
-	});
-});
 
 gulp.task('sass', function() {
 	return gulp
@@ -27,20 +20,20 @@ gulp.task('sass', function() {
 		.pipe(sass({
 			includePaths: ['bower_components']
 		}))
-		.pipe(autoprefixer({
-			browsers: ['last 5 versions']
-		}))
+		.pipe(autoprefixer({browsersList: ['defaults']}))
 		.pipe(sourcemaps.write())
 		.pipe(gulp.dest('httpdocs/css/'))
-		.pipe(browserSync.reload({
-			stream: true
-		}))
+		.pipe(browserSync.stream())
 });
 
-gulp.task('watch', ['browserSync', 'sass'], function(){
-	gulp.watch('scss/**/*.scss', ['sass']);
-	gulp.watch('scss/*.scss', ['sass']);
-	gulp.watch('httpdocs/**/*.html', browserSync.reload);
-});
+gulp.task('serve', gulp.series('sass', function() {
+	browserSync.init({
+		server: "./httpdocs"
+	});
 
-gulp.task('default', ['watch']);
+	gulp.watch('scss/**/*.scss', gulp.series('sass'));
+	gulp.watch('scss/*.scss', gulp.series('sass'));
+	gulp.watch('httpdocs/**/*').on('change', browserSync.reload);
+}));
+
+gulp.task('default', gulp.series('serve'));
