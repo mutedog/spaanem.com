@@ -1,0 +1,15 @@
+{
+    "name": "mutedog/graphql-resume-api",
+    "description": "self hosting a graphql api for my resume site",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Matt Spaanem",
+            "email": "spaanem@gmail.com"
+        }
+    ],
+    "require": {
+        "webonyx/graphql-php": "^15.29",
+        "ezyang/htmlpurifier": "^4.19"
+    }
+}

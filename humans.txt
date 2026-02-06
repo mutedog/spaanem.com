@@ -1,0 +1,15 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    Matt Spaanem -- Designer/Developer -- 
+
+# THANKS
+
+    Curtis Bowman for tweaks and suggestions
+
+# TECHNOLOGY COLOPHON
+
+    HTML5, CSS3, @Emotion/styled
+    React, Typescript, Vite, Hygraph

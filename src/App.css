@@ -1,0 +1,21 @@
+#root {
+
+}
+
+main {
+	padding: 1rem 2rem 2rem 2rem;
+	@media (min-width: 37em) {
+		padding: 1rem 4rem 2rem 4rem;
+	}
+	@media (min-width: 45em) {
+		padding: 1rem 2rem 2rem 3.1rem;
+		display: grid;
+		grid-template-columns: 25% 70%;
+		grid-column-gap: 5%;
+	}
+	@media (min-width: 58em) {
+		padding: 1rem 1rem 2rem 0rem;
+		max-width: 66rem;
+		grid-template-columns: 22.875rem auto;
+	}
+}

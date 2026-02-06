@@ -1,6 +1,0 @@
-@mixin boxesGenerator($widths, $containerName) {
-    @for $i from 1 through length($widths) {
-        $width: nth($widths, $i);
-        .#{$containerName}-#{$width} { max-width: #{$width}px; }
-    }
-}
